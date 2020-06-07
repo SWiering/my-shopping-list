@@ -1,6 +1,7 @@
 package com.simon.myshoppinglist.ui.login
 
 import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.simon.myshoppinglist.MainActivity
 
 import com.simon.myshoppinglist.R
 
@@ -61,7 +63,8 @@ class LoginActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK)
 
             //Complete and destroy login activity once successful
-            finish()
+//            finish()
+            startMenuActivity()
         })
 
         username.afterTextChanged {
@@ -92,6 +95,7 @@ class LoginActivity : AppCompatActivity() {
 
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
+                // TODO: Edit this to self made datbase thing
                 loginViewModel.login(username.text.toString(), password.text.toString())
             }
         }
@@ -111,7 +115,13 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+
+    private fun startMenuActivity(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 }
+
 
 /**
  * Extension function to simplify setting an afterTextChanged action to EditText components.
