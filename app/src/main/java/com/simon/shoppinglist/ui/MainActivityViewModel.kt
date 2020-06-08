@@ -15,17 +15,9 @@ class MainActivityViewModel (application: Application) : AndroidViewModel(applic
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val shoppingListRepository = ShoppingListRepository(application.applicationContext)
 
-    val shoppingList: LiveData<List<ListWithItems>> = shoppingListRepository.getAllShoppingLists()
-
     fun insertListWithItems(shoppingList: ListWithItems){
         ioScope.launch {
             shoppingListRepository.insertListWithItems(shoppingList)
-        }
-    }
-
-    fun deleteShoppingList(shoppingList: ShoppingList){
-        ioScope.launch {
-            shoppingListRepository.deleteList(shoppingList)
         }
     }
 

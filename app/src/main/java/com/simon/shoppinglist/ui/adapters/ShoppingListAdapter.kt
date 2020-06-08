@@ -14,12 +14,14 @@ import com.simon.shoppinglist.db.ShoppingListRepository
 import com.simon.shoppinglist.model.ListWithItems
 import com.simon.shoppinglist.model.ShoppingList
 import com.simon.shoppinglist.ui.AddListActivity
+import com.simon.shoppinglist.ui.ViewListActivity
 import com.simon.shoppinglist.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.list_card.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+const val EXTRA_LIST = "EXTRA_LIST"
 
 class ShoppingListAdapter(private val listWithItems: List<ListWithItems>) : RecyclerView.Adapter<ShoppingListAdapter.ViewHolder>() {
 
@@ -63,8 +65,8 @@ class ShoppingListAdapter(private val listWithItems: List<ListWithItems>) : Recy
 
     // TODO: Replace this so it can actually look up the list in an activity
     private fun viewList(holder: ViewHolder, position: Int) {
-        val intent = Intent(holder.itemView.context, AddListActivity::class.java)
-        intent.putExtra("list-id", listWithItems[position].shoppingList.id)
+        val intent = Intent(holder.itemView.context, ViewListActivity::class.java)
+        intent.putExtra(EXTRA_LIST, listWithItems[position])
         holder.itemView.context.startActivity(intent)
     }
 
