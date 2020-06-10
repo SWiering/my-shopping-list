@@ -13,12 +13,6 @@ interface ShoppingListDao {
     @Query("SELECT * FROM shopping_list")
     fun getAllLists(): LiveData<List<ListWithItems>>
 
-//    @Select
-//    suspend fun selectList(shoppingList: ShoppingList)
-
-//    @Transaction
-//    fun
-
     @Insert
     suspend fun insertList(shoppingList: ShoppingList): Long
 
@@ -32,8 +26,15 @@ interface ShoppingListDao {
     suspend fun deleteItem(shoppingListItem: ShoppingListItem)
 
     @Update
+    suspend fun updateItem(shoppingListItem: ShoppingListItem)
+
+    @Update
     suspend fun updateList(shoppingList: ShoppingList)
 
     @Query("DELETE FROM shopping_list")
     suspend fun deleteAllLists()
+
+    @Transaction
+    @Query("SELECT * FROM shopping_list WHERE listId = :id")
+    fun getListById(id: Long): LiveData<ListWithItems>
 }

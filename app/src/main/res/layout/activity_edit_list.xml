@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="15dp"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ui.AddListActivity">
+    tools:context=".ui.EditListActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etTitleContainer"
@@ -22,42 +22,6 @@
             android:hint="@string/title_list_input_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ToggleButton
-        android:id="@+id/tbShared"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/togglebutton_text"
-        app:layout_constraintBottom_toBottomOf="@+id/tvSharedLabel"
-        app:layout_constraintStart_toEndOf="@+id/tvSharedLabel"
-        app:layout_constraintTop_toTopOf="@+id/tvSharedLabel" />
-
-    <TextView
-        android:id="@+id/tvSharedLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/label_shared"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTitleContainer" />
-
-    <TextView
-        android:id="@+id/tvTokenLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/label_token"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbShared" />
-
-    <TextView
-        android:id="@+id/tvTokenPlaceholder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/token_placholder"
-        app:layout_constraintStart_toEndOf="@+id/tvTokenLabel"
-        app:layout_constraintTop_toTopOf="@+id/tvTokenLabel" />
 
     <TextView
         android:id="@+id/tvListLabel"
@@ -66,15 +30,7 @@
         android:layout_marginTop="24dp"
         android:text="@string/label_list_contents"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTokenLabel" />
-
-    <Button
-        android:id="@+id/btnListCreate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_list_create_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etTitleContainer" />
 
     <Button
         android:id="@+id/btnAddEntry"
@@ -89,9 +45,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnListCreate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvListLabel" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnSaveList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

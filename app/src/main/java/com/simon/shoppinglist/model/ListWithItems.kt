@@ -13,5 +13,5 @@ data class ListWithItems (
         parentColumn = "listId",
         entityColumn = "shoppingListId"
     )
-    val shoppingListItems: List<ShoppingListItem>
+    var shoppingListItems: List<ShoppingListItem>
 ): Parcelable

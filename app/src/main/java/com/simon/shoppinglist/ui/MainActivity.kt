@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners(){
-        fab.setOnClickListener{ startAddActivity() }
+        btnSaveList.setOnClickListener{ startAddActivity() }
     }
 
     private fun startAddActivity(){

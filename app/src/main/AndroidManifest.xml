@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ViewListActivity"></activity>
+        <activity android:name=".ui.EditListActivity"></activity>
+        <activity android:name=".ui.ViewListActivity" />
         <activity android:name=".ui.AddListActivity" />
         <activity
             android:name=".ui.MainActivity"

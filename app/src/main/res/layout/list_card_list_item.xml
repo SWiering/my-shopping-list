@@ -4,23 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <TextView
         android:id="@+id/tvItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="placeholder"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toEndOf="@+id/listItemType"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvItemQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="placeholder"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/tvItemName"
-        app:layout_constraintStart_toEndOf="@+id/tvItemName"
+        app:layout_constraintStart_toEndOf="@+id/listItemTimes"
         app:layout_constraintTop_toTopOf="@+id/tvItemName" />
+
+    <TextView
+        android:id="@+id/listItemType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/list_item_preface"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/listItemTimes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="list_item_times"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/tvItemName"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
