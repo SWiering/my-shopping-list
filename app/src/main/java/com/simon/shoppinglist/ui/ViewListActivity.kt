@@ -91,6 +91,7 @@ class ViewListActivity : AppCompatActivity() {
         val myThing: LiveData<ListWithItems> =  viewModel.getListById(myId)
 
         myThing.observe(this, Observer { theList ->
+            listWithItems = theList
             tvShoppingListTitle.text = theList.shoppingList.name
             this.listItems.clear()
             this.listItems.addAll(theList.shoppingListItems)
