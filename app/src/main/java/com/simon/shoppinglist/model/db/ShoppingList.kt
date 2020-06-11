@@ -7,14 +7,13 @@ import androidx.room.PrimaryKey
 import androidx.room.Relation
 import kotlinx.android.parcel.Parcelize
 
+// Properties of a shopping list
+
 @Parcelize
 @Entity(tableName = "shopping_list")
 data class ShoppingList(
     @ColumnInfo(name = "name")
     var name: String,
-
-//    @Relation(parentColumn = "id", entityColumn = "list_id")
-//    var items: List<ShoppingListItem>,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "listId")

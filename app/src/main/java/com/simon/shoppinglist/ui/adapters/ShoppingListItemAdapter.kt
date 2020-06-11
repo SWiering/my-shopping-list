@@ -13,9 +13,9 @@ import kotlinx.android.synthetic.main.list_entry_item.view.*
 
 
 class ShoppingListItemAdapter(private var shoppingListItems: List<ShoppingListItem>) : RecyclerView.Adapter<ShoppingListItemAdapter.ViewHolder>(){
-    //    /**
-//     * Creates and returns a ViewHolder object, inflating the layout called item_reminder.
-//     */
+    /**
+     * Creates and returns a ViewHolder object, inflating the layout called item_reminder.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.list_entry_item, parent, false)
@@ -29,13 +29,15 @@ class ShoppingListItemAdapter(private var shoppingListItems: List<ShoppingListIt
         return shoppingListItems.size
     }
 
+    // Add text changed listeners to the inputs so the name prop gets updated on change
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(shoppingListItems[position])
         holder.nameInput.addTextChangedListener(NameChanger(position))
         holder.quantityInput.addTextChangedListener(QuantityChanger(position))
+        holder.bind(shoppingListItems[position])
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // Initialize the inputs so a listener can bind to it
         val nameInput: TextInputEditText = itemView.etShoppingItemName
         val quantityInput: TextInputEditText = itemView.etShoppingItemQuantity
 
@@ -45,18 +47,20 @@ class ShoppingListItemAdapter(private var shoppingListItems: List<ShoppingListIt
         }
     }
 
-
+    // Change the name of the item when changed
     inner class NameChanger(private val listPosition: Int) : NameTextListener(){
         override fun onTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {
-            shoppingListItems[listPosition].name = charSequence.toString()
+            if(listPosition < itemCount){
+                shoppingListItems[listPosition].name = charSequence.toString()
+            }
         }
     }
+    // Change the quantity of the item when changed
     inner class QuantityChanger(val listPosition: Int) : NameTextListener(){
         override fun onTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {
-            if(charSequence.toString().isNotEmpty()){
+            if(charSequence.toString().isNotEmpty() && listPosition < itemCount){
                 shoppingListItems[listPosition].quantity = charSequence.toString().toInt()
             }
-//            if(shoppingListItems[listPosition].quantity)
         }
     }
     // we make TextWatcher to be aware of the position it currently works with

@@ -20,6 +20,8 @@ import com.simon.shoppinglist.R
 import com.simon.shoppinglist.model.db.ListWithItems
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+const val MAX_ITEMS = 6
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -37,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         initListeners()
-//        text_home.text = "Hallo"
-//        observeViewModel()
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -46,18 +46,18 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home,
-            R.id.nav_gallery,
-            R.id.nav_slideshow
+            R.id.nav_home
         ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
+    // initialize the listeners ( mostly buttons )
     private fun initListeners(){
         btnSaveList.setOnClickListener{ startAddActivity() }
     }
 
+    // Start the activity to add a new list with items
     private fun startAddActivity(){
         val intent = Intent(this, AddListActivity::class.java)
         startActivityForResult(intent,
@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    // Function to remove all existing lists
     private fun removeLists(){
         viewModel.deleteAllShoppingLists()
     }
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             when (requestCode) {
                 ADD_LIST_REQUEST_CODE -> {
                     data?.let {safeData ->
+                        // If data is found insert it into the database
                         val shoppingList = safeData.getParcelableExtra<ListWithItems>(EXTRA_LIST)
 
                         shoppingList?.let {

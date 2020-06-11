@@ -8,10 +8,12 @@ import com.simon.shoppinglist.R
 import com.simon.shoppinglist.model.db.ShoppingListItem
 import kotlinx.android.synthetic.main.list_card_list_item.view.*
 
+// Nothing really special to see here
+
 class ShoppingListCardAdapter(private val shoppingListItems: List<ShoppingListItem>) : RecyclerView.Adapter<ShoppingListCardAdapter.ViewHolder>(){
-    //    /**
-//     * Creates and returns a ViewHolder object, inflating the layout called item_reminder.
-//     */
+    /**
+     * Creates and returns a ViewHolder object, inflating the layout called item_reminder.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.list_card_list_item, parent, false)

@@ -48,16 +48,16 @@ class AddListActivity : AppCompatActivity() {
 
     }
 
+    // This is to intialize the viewmodel, not to already get the suggestions
     private fun initViewModel() {
         viewModel = ViewModelProvider(this).get(AddListViewModel::class.java)
 
         viewModel.suggestions.observe(this, Observer {
             it?.items?.let {
-                    it1 ->
+                    suggestionItem ->
                         this.sugItems.clear()
-                        this.sugItems.addAll(it1)
-//                this.sugItems.addAll(theList.shoppingListItems)
-                    suggestionAdapter.notifyDataSetChanged()
+                        this.sugItems.addAll(suggestionItem)
+                        suggestionAdapter.notifyDataSetChanged()
             }
         })
 
@@ -66,11 +66,13 @@ class AddListActivity : AppCompatActivity() {
         })
     }
 
+    // Initialize the listeners for the buttons
     private fun initListeners() {
         btnAddEntry.setOnClickListener{ addEntryItem() }
         btnListCreate.setOnClickListener{ createList() }
     }
 
+    // Initialize the recyclerviews and get suggestions from the apis into the rv
     private fun initViews() {
         rvShoppingListEntries.layoutManager = LinearLayoutManager(this@AddListActivity, RecyclerView.VERTICAL, false)
         rvShoppingListEntries.adapter = shoppingListItemAdapter
@@ -83,16 +85,17 @@ class AddListActivity : AppCompatActivity() {
         viewModel.getSuggestions()
     }
 
+    // Create a new entry for the shopping list
     private fun addEntryItem(name: String = "", quantity: Int = 1) {
-        val listItem = ShoppingListItem(name, quantity)
-
-        shoppingListItems.add(listItem)
-
-        shoppingListItemAdapter.notifyDataSetChanged()
+        if(shoppingListItems.size < MAX_ITEMS){
+            val listItem = ShoppingListItem(name, quantity)
+            shoppingListItems.add(listItem)
+            shoppingListItemAdapter.notifyDataSetChanged()
+        }
     }
 
+    // Initialize the data of the new ListWithItems object
     private fun createList() {
-        // TODO: Add validation on empty fields
         val shopList = ShoppingList(
             etTitle.text.toString()
         )
@@ -108,14 +111,15 @@ class AddListActivity : AppCompatActivity() {
         finish()
     }
 
+    // When a suggestion is clicked, create an entry with its data
     private fun onSuggestionClick(suggestionItem: SuggestionItem){
         addEntryItem(suggestionItem.name, 1)
     }
 
+    // helper so items can be removed from the list
     private fun createItemTouchHelper(): ItemTouchHelper {
 
         // Callback which is used to create the ItemTouch helper. Only enables left swipe.
-        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
         val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             // Enables or Disables the ability to move items up and down.

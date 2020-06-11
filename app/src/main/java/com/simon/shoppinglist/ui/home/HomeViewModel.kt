@@ -18,12 +18,6 @@ class HomeViewModel (application: Application) : AndroidViewModel(application){
 
     val shoppingList: LiveData<List<ListWithItems>> = shoppingListRepository.getAllShoppingLists()
 
-    fun deleteShoppingList(shoppingList: ShoppingList){
-        ioScope.launch {
-            shoppingListRepository.deleteList(shoppingList)
-        }
-    }
-
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
     }

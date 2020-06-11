@@ -5,6 +5,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// Initializer for the API with the baseUrl
+
 class SuggestionApi {
     companion object {
         // The base url off the api.

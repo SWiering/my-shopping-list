@@ -10,6 +10,8 @@ import com.simon.shoppinglist.R
 import com.simon.shoppinglist.model.services.SuggestionItem
 import kotlinx.android.synthetic.main.item_suggestion.view.*
 
+// Nothing special to see here
+
 class SuggestionAdapter(private val suggestions: List<SuggestionItem>, private val onClick: (SuggestionItem) -> Unit) : RecyclerView.Adapter<SuggestionAdapter.ViewHolder>(){
 
     private lateinit var context: Context

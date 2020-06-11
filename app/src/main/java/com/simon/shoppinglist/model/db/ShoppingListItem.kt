@@ -6,6 +6,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+// Properties of a shoppinglistitem, has an id of itself and an id of a shopping list
+
 @Parcelize
 @Entity(tableName = "item")
 data class ShoppingListItem (

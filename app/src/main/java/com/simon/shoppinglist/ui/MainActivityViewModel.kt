@@ -14,6 +14,8 @@ class MainActivityViewModel (application: Application) : AndroidViewModel(applic
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val shoppingListRepository = ShoppingListRepository(application.applicationContext)
 
+    // All these methods speak for themselves
+
     fun insertListWithItems(shoppingList: ListWithItems){
         ioScope.launch {
             shoppingListRepository.insertListWithItems(shoppingList)
@@ -26,14 +28,7 @@ class MainActivityViewModel (application: Application) : AndroidViewModel(applic
         }
     }
 
-
-
     fun getListById(id: Long): LiveData<ListWithItems> = shoppingListRepository.getListById(id)
-//    fun getListById(id: Long) {
-//        ioScope.launch {
-//            shoppingListRepository.getListById(id)
-//        }
-//    }
 
     fun updateList(myList: ListWithItems){
         ioScope.launch {

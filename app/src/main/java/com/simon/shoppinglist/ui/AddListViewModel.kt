@@ -17,6 +17,7 @@ class AddListViewModel(application: Application) : AndroidViewModel(application)
 
     val error = MutableLiveData<String>()
 
+    // Get suggestions from the API
     fun getSuggestions() {
         suggestionsRepository.getSuggestions().enqueue(object : Callback<SuggestionList> {
             override fun onResponse(call: Call<SuggestionList>, response: Response<SuggestionList>) {

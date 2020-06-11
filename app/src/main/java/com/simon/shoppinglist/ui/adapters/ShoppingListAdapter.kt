@@ -40,27 +40,27 @@ class ShoppingListAdapter(private val listWithItems: List<ListWithItems>) : Recy
         return listWithItems.size
     }
 
+    // A way to create button onclick listeners in the rv
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // TODO: Rename this shit
-
         holder.btnLook.setOnClickListener { viewList(holder, position) }
         holder.btnDelete.setOnClickListener { deleteList(holder, position) }
 
         holder.bind(listWithItems[position])
     }
 
+    // function to actually delete the list from the rv and database
     private fun deleteList(holder:ViewHolder, position: Int) {
 
         val ioScope = CoroutineScope(Dispatchers.IO)
         val shoppingListRepository = ShoppingListRepository(holder.itemView.context)
 
-        // TODO: Find a way to do this with a viewmodel?
+        // Because the button is inside the recyclerview do it this way
         ioScope.launch {
             shoppingListRepository.deleteListWithItems(listWithItems[position])
         }
     }
 
-    // TODO: Replace this so it can actually look up the list in an activity
+    // Start the viewlist activity to view the shopping list
     private fun viewList(holder: ViewHolder, position: Int) {
         val intent = Intent(holder.itemView.context, ViewListActivity::class.java)
         intent.putExtra(EXTRA_LIST, listWithItems[position])
@@ -72,8 +72,10 @@ class ShoppingListAdapter(private val listWithItems: List<ListWithItems>) : Recy
         val btnDelete: Button = itemView.btnCardDelete
 
         @SuppressLint("WrongConstant")
+        // initialize the items in the recyclerview
         fun bind(shoppingList: ListWithItems) {
             itemView.tvCardTitle.text = shoppingList.shoppingList.name
+
 
             itemView.rvShoppingListItems.layoutManager = LinearLayoutManager(itemView.context, LinearLayout.VERTICAL, false)
             itemView.rvShoppingListItems.adapter =

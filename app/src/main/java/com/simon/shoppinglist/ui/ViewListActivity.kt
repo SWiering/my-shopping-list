@@ -58,9 +58,11 @@ class ViewListActivity : AppCompatActivity() {
                         val shoppingList = safeData.getParcelableExtra<ListWithItems>(EDIT_LIST_REQUEST)
 
                         shoppingList?.let {
+                            // Update the list, also links and other data like the title
                                 safeShoppingList ->
                             viewModel.updateList(safeShoppingList)
 
+                            // If the list with items is edited, then initialize the view again
                             initViews(safeShoppingList.shoppingList.id!!)
 
                         } ?: run {
@@ -77,6 +79,7 @@ class ViewListActivity : AppCompatActivity() {
     @SuppressLint("WrongConstant")
     private fun initViews(theId: Long = 0) {
 
+        // Initialize the recyclerview for the items
         rvShoppingListItems.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         rvShoppingListItems.adapter = listItemsAdapter
 
@@ -88,8 +91,10 @@ class ViewListActivity : AppCompatActivity() {
             myId = listWithItems.shoppingList.id!!
         }
 
+        // Get new data from the currently selected list with items
         val myThing: LiveData<ListWithItems> =  viewModel.getListById(myId)
 
+        // observe the live data
         myThing.observe(this, Observer { theList ->
             listWithItems = theList
             tvShoppingListTitle.text = theList.shoppingList.name

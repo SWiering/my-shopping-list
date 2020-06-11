@@ -6,6 +6,8 @@ import com.simon.shoppinglist.model.db.ListWithItems
 import com.simon.shoppinglist.model.db.ShoppingList
 import com.simon.shoppinglist.model.db.ShoppingListItem
 
+// The DAO for the shoppinglists and shoppinglistitems, converts queries to functions
+
 @Dao
 interface ShoppingListDao {
 
