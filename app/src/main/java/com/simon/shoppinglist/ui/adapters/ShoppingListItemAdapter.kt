@@ -5,6 +5,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.simon.shoppinglist.R
@@ -12,7 +13,7 @@ import com.simon.shoppinglist.model.ShoppingListItem
 import kotlinx.android.synthetic.main.list_entry_item.view.*
 
 
-class ShoppingListItemAdapter(private val shoppingListItems: List<ShoppingListItem>) : RecyclerView.Adapter<ShoppingListItemAdapter.ViewHolder>(){
+class ShoppingListItemAdapter(private var shoppingListItems: List<ShoppingListItem>) : RecyclerView.Adapter<ShoppingListItemAdapter.ViewHolder>(){
     //    /**
 //     * Creates and returns a ViewHolder object, inflating the layout called item_reminder.
 //     */

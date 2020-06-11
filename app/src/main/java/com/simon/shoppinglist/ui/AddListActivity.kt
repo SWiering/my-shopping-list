@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
@@ -40,6 +41,8 @@ class AddListActivity : AppCompatActivity() {
     private fun initViews() {
         rvShoppingListEntries.layoutManager = LinearLayoutManager(this@AddListActivity, RecyclerView.VERTICAL, false)
         rvShoppingListEntries.adapter = shoppingListItemAdapter
+
+        createItemTouchHelper().attachToRecyclerView(rvShoppingListEntries)
     }
 
     private fun addEntryItem() {
@@ -65,5 +68,30 @@ class AddListActivity : AppCompatActivity() {
         resultIntent.putExtra(EXTRA_LIST, listWithItems)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
+    }
+
+    private fun createItemTouchHelper(): ItemTouchHelper {
+
+        // Callback which is used to create the ItemTouch helper. Only enables left swipe.
+        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            // Enables or Disables the ability to move items up and down.
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            // Callback triggered when a user swiped an item.
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                shoppingListItems.removeAt(position)
+                shoppingListItemAdapter.notifyDataSetChanged()
+            }
+        }
+        return ItemTouchHelper(callback)
     }
 }

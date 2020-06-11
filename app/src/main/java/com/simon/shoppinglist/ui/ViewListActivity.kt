@@ -52,8 +52,6 @@ class ViewListActivity : AppCompatActivity() {
         startActivityForResult(editIntent, EDIT_LIST_REQUEST_CODE)
     }
 
-//        viewModel.updateList(myList)
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             when (requestCode) {
@@ -77,7 +75,6 @@ class ViewListActivity : AppCompatActivity() {
             }
         }
     }
-
 
     @SuppressLint("WrongConstant")
     private fun initViews(theId: Long = 0) {

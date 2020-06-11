@@ -2,12 +2,10 @@ package com.simon.shoppinglist.db
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import androidx.room.Query
 import androidx.room.Transaction
 import com.simon.shoppinglist.model.ListWithItems
 import com.simon.shoppinglist.model.ShoppingList
 import com.simon.shoppinglist.model.ShoppingListItem
-import java.lang.Exception
 
 class ShoppingListRepository(context: Context) {
 
@@ -28,6 +26,19 @@ class ShoppingListRepository(context: Context) {
 
     @Transaction
     suspend fun updateList(myList: ListWithItems){
+        myList.shoppingList.id?.let {
+            val currentList = listById(it)
+
+            for (theItem: ShoppingListItem in currentList.shoppingListItems){
+                val foundItemInNewList = myList.shoppingListItems.filter { itemFromNewList ->
+                    itemFromNewList.name.contains(theItem.name)
+                }
+                if (foundItemInNewList.isEmpty()){
+                    delete(theItem)
+                }
+            }
+        }
+
         updateList(myList.shoppingList)
 
         for(myItem: ShoppingListItem in myList.shoppingListItems){
@@ -64,7 +75,6 @@ class ShoppingListRepository(context: Context) {
     private suspend fun insert(shoppingListItem: ShoppingListItem) =
         shoppingListDao.insertItem(shoppingListItem)
 
-
     private suspend fun delete(shoppingListItem: ShoppingListItem) =
         shoppingListDao.deleteItem(shoppingListItem)
 
@@ -74,10 +84,9 @@ class ShoppingListRepository(context: Context) {
     private suspend fun update(shoppingListItem: ShoppingListItem) =
         shoppingListDao.updateItem(shoppingListItem)
 
-
-
     suspend fun deleteAllLists() = shoppingListDao.deleteAllLists()
 
+    suspend fun listById(id: Long): ListWithItems = shoppingListDao.listById(id)
 
     fun getListById(id: Long): LiveData<ListWithItems> = shoppingListDao.getListById(id)
 }

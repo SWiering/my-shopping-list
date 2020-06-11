@@ -38,7 +38,7 @@
         android:id="@+id/listItemTimes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="list_item_times"
+        android:text="@string/list_item_times"
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/tvItemName"
         app:layout_constraintTop_toTopOf="parent" />

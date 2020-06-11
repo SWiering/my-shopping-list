@@ -37,4 +37,8 @@ interface ShoppingListDao {
     @Transaction
     @Query("SELECT * FROM shopping_list WHERE listId = :id")
     fun getListById(id: Long): LiveData<ListWithItems>
+
+    @Query("SELECT * FROM shopping_list WHERE listId = :id")
+    suspend fun listById(id: Long): ListWithItems
+
 }
