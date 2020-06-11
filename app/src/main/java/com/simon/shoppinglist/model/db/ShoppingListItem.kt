@@ -1,22 +1,24 @@
-package com.simon.shoppinglist.model
+package com.simon.shoppinglist.model.db
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.Relation
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-@Entity(tableName = "shopping_list")
-data class ShoppingList(
+@Entity(tableName = "item")
+data class ShoppingListItem (
     @ColumnInfo(name = "name")
     var name: String,
 
-//    @Relation(parentColumn = "id", entityColumn = "list_id")
-//    var items: List<ShoppingListItem>,
+    @ColumnInfo(name = "quantity")
+    var quantity: Int,
+
+    @ColumnInfo(name = "shoppingListId")
+    var shoppingListId: Long? = null,
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "listId")
+    @ColumnInfo(name = "itemId")
     var id: Long? = null
-) : Parcelable
+): Parcelable

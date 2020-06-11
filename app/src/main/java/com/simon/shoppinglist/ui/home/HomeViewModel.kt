@@ -4,10 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.simon.shoppinglist.db.ShoppingListRepository
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingList
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

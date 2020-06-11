@@ -40,4 +40,5 @@
     <string name="token_placholder">Token placholder</string>
     <string name="list_item_preface">-</string>
     <string name="list_item_times">x</string>
+    <string name="suggestions">Suggestions</string>
 </resources>

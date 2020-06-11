@@ -17,7 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ListWithItems
+import com.simon.shoppinglist.model.db.ListWithItems
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity() {

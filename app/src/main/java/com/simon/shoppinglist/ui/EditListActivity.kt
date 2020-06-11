@@ -4,21 +4,17 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingListItem
 import com.simon.shoppinglist.ui.adapters.ShoppingListItemAdapter
 import kotlinx.android.synthetic.main.activity_add_list.btnAddEntry
 import kotlinx.android.synthetic.main.activity_add_list.etTitle
 import kotlinx.android.synthetic.main.activity_add_list.rvShoppingListEntries
-import kotlinx.android.synthetic.main.activity_edit_list.*
 import kotlinx.android.synthetic.main.activity_edit_list.btnSaveList
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 class EditListActivity : AppCompatActivity() {
 
@@ -68,7 +64,8 @@ class EditListActivity : AppCompatActivity() {
     }
 
     private fun addEntryItem(name: String = "", quantity: Int = 1) {
-        val listItem = ShoppingListItem(name, quantity)
+        val listItem =
+            ShoppingListItem(name, quantity)
         shoppingListItems.add(listItem)
         shoppingListItemAdapter.notifyDataSetChanged()
     }

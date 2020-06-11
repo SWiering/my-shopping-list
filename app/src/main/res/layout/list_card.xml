@@ -40,16 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_person" />
 
-            <ImageView
-                android:id="@+id/ivShare"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btnCardDelete"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btnCardDelete"
-                app:srcCompat="@drawable/ic_share" />
-
-<!--            <TextView-->
+            <!--            <TextView-->
 <!--                android:layout_width="wrap_content"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:layout_marginTop="16dp"-->

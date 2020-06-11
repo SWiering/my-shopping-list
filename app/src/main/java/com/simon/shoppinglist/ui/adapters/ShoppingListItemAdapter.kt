@@ -5,11 +5,10 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ShoppingListItem
 import kotlinx.android.synthetic.main.list_entry_item.view.*
 
 
@@ -54,7 +53,10 @@ class ShoppingListItemAdapter(private var shoppingListItems: List<ShoppingListIt
     }
     inner class QuantityChanger(val listPosition: Int) : NameTextListener(){
         override fun onTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {
-            shoppingListItems[listPosition].quantity = charSequence.toString().toInt()
+            if(charSequence.toString().isNotEmpty()){
+                shoppingListItems[listPosition].quantity = charSequence.toString().toInt()
+            }
+//            if(shoppingListItems[listPosition].quantity)
         }
     }
     // we make TextWatcher to be aware of the position it currently works with

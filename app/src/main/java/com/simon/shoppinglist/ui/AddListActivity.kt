@@ -5,14 +5,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingList
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingList
+import com.simon.shoppinglist.model.db.ShoppingListItem
+import com.simon.shoppinglist.model.services.SuggestionItem
 import com.simon.shoppinglist.ui.adapters.ShoppingListItemAdapter
+import com.simon.shoppinglist.ui.adapters.SuggestionAdapter
 import kotlinx.android.synthetic.main.activity_add_list.*
 
 const val EXTRA_LIST = "EXTRA_LIST"
@@ -25,12 +30,40 @@ class AddListActivity : AppCompatActivity() {
             shoppingListItems
         )
 
+    private lateinit var viewModel: AddListViewModel
+
+    private var sugItems = arrayListOf<SuggestionItem>()
+    private val suggestionAdapter =
+        SuggestionAdapter(
+            sugItems, { suggestionItem -> onSuggestionClick(suggestionItem) }
+        )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_list)
 
+        initViewModel()
         initViews()
         initListeners()
+
+    }
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(this).get(AddListViewModel::class.java)
+
+        viewModel.suggestions.observe(this, Observer {
+            it?.items?.let {
+                    it1 ->
+                        this.sugItems.clear()
+                        this.sugItems.addAll(it1)
+//                this.sugItems.addAll(theList.shoppingListItems)
+                    suggestionAdapter.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun initListeners() {
@@ -42,11 +75,16 @@ class AddListActivity : AppCompatActivity() {
         rvShoppingListEntries.layoutManager = LinearLayoutManager(this@AddListActivity, RecyclerView.VERTICAL, false)
         rvShoppingListEntries.adapter = shoppingListItemAdapter
 
+        rvSuggestions.layoutManager = LinearLayoutManager(this@AddListActivity, RecyclerView.HORIZONTAL, false)
+        rvSuggestions.adapter = suggestionAdapter
+
         createItemTouchHelper().attachToRecyclerView(rvShoppingListEntries)
+
+        viewModel.getSuggestions()
     }
 
-    private fun addEntryItem() {
-        val listItem = ShoppingListItem("", 1)
+    private fun addEntryItem(name: String = "", quantity: Int = 1) {
+        val listItem = ShoppingListItem(name, quantity)
 
         shoppingListItems.add(listItem)
 
@@ -68,6 +106,10 @@ class AddListActivity : AppCompatActivity() {
         resultIntent.putExtra(EXTRA_LIST, listWithItems)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
+    }
+
+    private fun onSuggestionClick(suggestionItem: SuggestionItem){
+        addEntryItem(suggestionItem.name, 1)
     }
 
     private fun createItemTouchHelper(): ItemTouchHelper {

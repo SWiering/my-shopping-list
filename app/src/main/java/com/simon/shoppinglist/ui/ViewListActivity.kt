@@ -6,17 +6,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingListItem
 import com.simon.shoppinglist.ui.adapters.ShoppingListCardAdapter
-import com.simon.shoppinglist.ui.adapters.ShoppingListItemAdapter
 import kotlinx.android.synthetic.main.activity_view_list.*
 
 const val EDIT_LIST_REQUEST = "EDIT_LIST"

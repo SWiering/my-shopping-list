@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
 import com.simon.shoppinglist.db.ShoppingListRepository
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingList
-import com.simon.shoppinglist.ui.AddListActivity
+import com.simon.shoppinglist.model.db.ListWithItems
 import com.simon.shoppinglist.ui.ViewListActivity
-import com.simon.shoppinglist.ui.home.HomeViewModel
 import kotlinx.android.synthetic.main.list_card.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

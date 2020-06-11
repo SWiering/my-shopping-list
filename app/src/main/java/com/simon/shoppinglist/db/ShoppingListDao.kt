@@ -2,9 +2,9 @@ package com.simon.shoppinglist.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingList
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingList
+import com.simon.shoppinglist.model.db.ShoppingListItem
 
 @Dao
 interface ShoppingListDao {

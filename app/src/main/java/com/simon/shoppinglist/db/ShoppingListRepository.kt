@@ -3,9 +3,9 @@ package com.simon.shoppinglist.db
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.Transaction
-import com.simon.shoppinglist.model.ListWithItems
-import com.simon.shoppinglist.model.ShoppingList
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ListWithItems
+import com.simon.shoppinglist.model.db.ShoppingList
+import com.simon.shoppinglist.model.db.ShoppingListItem
 
 class ShoppingListRepository(context: Context) {
 

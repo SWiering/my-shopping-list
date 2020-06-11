@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ListWithItems
+import com.simon.shoppinglist.model.db.ListWithItems
 import com.simon.shoppinglist.ui.adapters.ShoppingListAdapter
 
 class HomeFragment : Fragment() {

@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.simon.shoppinglist.R
-import com.simon.shoppinglist.model.ShoppingListItem
+import com.simon.shoppinglist.model.db.ShoppingListItem
 import kotlinx.android.synthetic.main.list_card_list_item.view.*
 
 class ShoppingListCardAdapter(private val shoppingListItems: List<ShoppingListItem>) : RecyclerView.Adapter<ShoppingListCardAdapter.ViewHolder>(){
